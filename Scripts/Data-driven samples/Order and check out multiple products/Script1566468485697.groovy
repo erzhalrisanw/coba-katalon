@@ -2,9 +2,7 @@ import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
 import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-
-import java.util.stream.Collectors
-
+import java.util.stream.Collectors as Collectors
 import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
 import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
@@ -23,12 +21,16 @@ WebUI.waitForElementPresent(findTestObject('Pages/Shop page/lnkShop'), GlobalVar
 WebUI.click(findTestObject('Pages/Shop page/lnkShop'))
 
 TestData product = findTestData(GlobalVariable.dataFile)
-List<String> productList = product.getAllData().stream()
-							.map{data -> data[0]}/*get first column of each row in data file */
-							.collect(Collectors.toList())/*add collect and parse to list*/
 
-for(def productName : productList){
-	CustomKeywords.'sample.Shop.addToCart'(productName.toString(), GlobalVariable.urlProduct)
+List<String> productList = product.getAllData().stream().map({ def data ->
+        data[0] /*get first column of each row in data file */
+    }).collect(Collectors.toList() /*add collect and parse to list*/ )
+
+for (def productName : productList) {
+    CustomKeywords.'sample.Shop.addToCart'(productName.toString(), GlobalVariable.urlProduct)
 }
+
 CustomKeywords.'sample.Checkout.CheckoutShopWithGlobalVariable'()
+
 WebUI.closeBrowser()
+

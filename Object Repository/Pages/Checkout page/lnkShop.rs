@@ -9,6 +9,10 @@
          <key>BASIC</key>
          <value>//*[@class = 'button wc-backward']</value>
       </entry>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
    </selectorCollection>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
